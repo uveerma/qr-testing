@@ -8,6 +8,7 @@ const candypay = new CandyPay({
   network: "mainnet",
   config: {
     collect_shipping_address: false,
+    redirect_with_session_id: false
   },
 });
 

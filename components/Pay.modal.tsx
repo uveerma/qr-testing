@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 
 interface IProps {
   isOpen: boolean;
@@ -20,24 +20,22 @@ interface IProps {
 
 const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
   const [load, setLoad] = useState(false);
-  const [value, setValue] = useState(10);
+  const [value, setValue] = useState(0.1);
   const router = useRouter();
-  const price = useMemo(() => value * 0.01, [value]);
 
   const commerceHandler = async () => {
     setLoad(true);
     if (isEligible) {
-      setValue(5);
+      setValue(0.05);
     }
 
     const response = await axios.post(
       "https://api.commerce.coinbase.com/charges/",
       {
-        name: "The Human Fund",
-        description: "Money For People",
+        name: "Nike Air Force",
         pricing_type: "fixed_price",
         local_price: {
-          amount: `${price}`,
+          amount: `${value}`,
           currency: "USD",
         },
       },
@@ -59,12 +57,12 @@ const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Pay</ModalHeader>
+        <ModalHeader fontSize="lg">Continue with Polygon</ModalHeader>
         <ModalCloseButton />
         <ModalBody display="flex" justifyContent="center" flexDir="column">
-          <Text align="center" fontSize="lg">
+          <Text align="center" fontSize="lg" mb="4" mt="0.5">
             {isEligible
-              ? "You are eligible for a discount"
+              ? "You are eligible for a 50% discount"
               : "You are not eligible for a discount"}
           </Text>
 
@@ -75,7 +73,7 @@ const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
             onClick={commerceHandler}
             isLoading={load}
           >
-            Proceed to checkout
+            Checkout
           </Button>
         </ModalBody>
       </ModalContent>
