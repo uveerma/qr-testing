@@ -8,11 +8,6 @@ import {
   Flex,
   Heading,
   Image,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   SimpleGrid,
   Stack,
   StackDivider,
@@ -21,7 +16,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton, darkTheme } from "@rainbow-me/rainbowkit";
 import { Alchemy, Network } from "alchemy-sdk";
 import axios from "axios";
 import { useState } from "react";
@@ -41,7 +36,6 @@ export default function Home() {
   };
 
   const alchemy = new Alchemy(config);
-
 
   const getNfts = async () => {
     setIsLoading(true);
@@ -120,13 +114,18 @@ export default function Home() {
                 {" "}
               </Button>
             ) : (
-              <Button colorScheme="purple" width="200px" onClick={mutate}>
+              <Button colorScheme="purple" mr={6} width="200px" as='b' borderRadius={8} onClick={mutate}>
                 Pay with Solana{" "}
               </Button>
             )}
 
             {mounted()
-              ? !address && <ConnectButton showBalance={false} />
+              ? !address && (
+                  <ConnectButton
+                    label={"Pay with Polygon"}
+                    showBalance={false}
+                  />
+                )
               : null}
             {mounted()
               ? address && (
