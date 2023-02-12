@@ -1,39 +1,37 @@
+import { PayModal } from "@/components/Pay.modal";
+import useIsMounted from "@/hooks/useIsMounted";
+import { useCheckout } from "@candypay/react-checkout-pos";
 import {
   Box,
+  Button,
   Container,
-  Stack,
-  Text,
-  Image,
   Flex,
-  VStack,
-  NumberInputField,
   Heading,
-  SimpleGrid,
-  StackDivider,
-  useColorModeValue,
-  NumberInputStepper,
-  NumberInput,
+  Image,
   NumberDecrementStepper,
   NumberIncrementStepper,
-  Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  SimpleGrid,
+  Stack,
+  StackDivider,
+  Text,
+  useColorModeValue,
   useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import axios from "axios";
-import { useCheckout } from "@candypay/react-checkout-pos";
-import { useRouter } from "next/router";
-import { PayModal } from "@/components/Pay.modal";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import useIsMounted from "@/hooks/useIsMounted";
-import { useAccount } from "wagmi";
 import { Alchemy, Network } from "alchemy-sdk";
+import axios from "axios";
+import { useState } from "react";
+import { useAccount } from "wagmi";
 
 export default function Simple() {
   const [value, setValue] = useState(5);
   const [load, setLoad] = useState(false);
   const mounted = useIsMounted();
   const { address } = useAccount();
-  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEligible, setIsEligible] = useState(false);
 
@@ -62,35 +60,6 @@ export default function Simple() {
       charge: value,
     });
     return data.session_id;
-  };
-
-  const commerceHandler = async () => {
-    setLoad(true);
-    const price = value * 0.01;
-
-    const response = await axios.post(
-      "https://api.commerce.coinbase.com/charges/",
-      {
-        name: "The Human Fund",
-        description: "Money For People",
-        pricing_type: "fixed_price",
-        local_price: {
-          amount: `${price}`,
-          currency: "USD",
-        },
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CC-Api-Key": "957d57f9-b8b8-4b4e-bd7d-984b96dd716f",
-          "X-CC-Version": "2018-03-22",
-        },
-      }
-    );
-
-    const payment_url = response.data.data.hosted_url;
-    setLoad(false);
-    router.push(payment_url);
   };
 
   const { mutate, isLoading } = useCheckout(sessionHandler);
@@ -177,7 +146,9 @@ export default function Simple() {
               </Button>
             )}
 
-            {!address && <ConnectButton showBalance={false} />}
+            {mounted()
+              ? !address && <ConnectButton showBalance={false} />
+              : null}
             {mounted()
               ? address && (
                   <Button
@@ -190,14 +161,6 @@ export default function Simple() {
                   </Button>
                 )
               : null}
-            {/* <Button
-              width="200px"
-              colorScheme="linkedin"
-              onClick={commerceHandler}
-              isLoading={load}
-            >
-              Pay with Polygon
-            </Button> */}
           </Stack>
         </Stack>
       </SimpleGrid>

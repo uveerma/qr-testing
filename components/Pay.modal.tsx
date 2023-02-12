@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 
 interface IProps {
   isOpen: boolean;
@@ -22,11 +22,13 @@ const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
   const [load, setLoad] = useState(false);
   const [value, setValue] = useState(10);
   const router = useRouter();
+  const price = useMemo(() => value * 0.01, [value]);
 
   const commerceHandler = async () => {
     setLoad(true);
-    if (isEligible) setValue(5);
-    const price = value * 0.01;
+    if (isEligible) {
+      setValue(5);
+    }
 
     const response = await axios.post(
       "https://api.commerce.coinbase.com/charges/",
@@ -71,6 +73,7 @@ const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
             mx="auto"
             my="2"
             onClick={commerceHandler}
+            isLoading={load}
           >
             Proceed to checkout
           </Button>
