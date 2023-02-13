@@ -6,8 +6,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const response = await candypay.session.create({
-        success_url: "https://posolpayments.vercel.app/success",
-        cancel_url: "https://posolpayments.vercel.app/",
+        success_url: "https://pos-crypto-pay.vercel.app/",
+        cancel_url: "https://pos-crypto-pay.vercel.app/",
         tokens: ["shdw", "bonk"],
         items: [
           {
@@ -19,10 +19,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ],
         discounts: {
           verified_creator_address:
-            "B4x93Px5YYcQdpvEKmbPMWKGC5a8hytNqpitQFsEAjDx",
+            "4Bxkgsf8xC5pxS8jYKmpjcFt7vaCYcaKsnXEWgPMbNMG",
           discount: 0.5,
-          name: "LILY NFT",
-          image: "https://img-cdn.magiceden.dev/rs:fill:400:400:0:0/plain/https://bafkreihwrpyr52wax3i5drzi5pg4v2wrgylpwi54im7qb7nzz7tpdsmmzm.ipfs.nftstorage.link/",
+          name: "Nike Coupons",
+          image: "https://cdn.freebiesupply.com/logos/large/2x/nike-4-logo-png-transparent.png",
         },
       });
 

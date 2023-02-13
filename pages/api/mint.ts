@@ -50,7 +50,7 @@ async function post(
     const reference = anchor.web3.Keypair.generate().publicKey;
     const mint = anchor.web3.Keypair.generate();
     const keypair = anchor.web3.Keypair.fromSecretKey(
-      base58.decode("2AmqcXAcB9P7ueDYAWRyDbeHu5bRSDpFi7DCeKm4L6D19ptMe9gg1hUgXJW1xCYzKhVJDQAx5PdeBQJkT3mStTuc")
+      base58.decode(process.env.SOL_PRIVATE_KEY!)
     );
     const metaplex = Metaplex.make(connection).use(keypairIdentity(keypair));
 

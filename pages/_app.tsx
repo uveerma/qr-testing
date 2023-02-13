@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
-import { CandyPayProvider } from "@candypay/react-checkout-pos";
 import "@rainbow-me/rainbowkit/styles.css";
 import {
   getDefaultWallets,
@@ -46,10 +45,8 @@ export default function App({ Component, pageProps }: AppProps) {
           modalSize="compact"
           chains={chains}
         >
-          <CandyPayProvider publicApiKey={process.env.NEXT_PUBLIC_CP_API!}>
-            <Toaster />
-            <Component {...pageProps} />
-          </CandyPayProvider>
+          <Toaster />
+          <Component {...pageProps} />
         </RainbowKitProvider>
       </WagmiConfig>
     </ChakraProvider>
