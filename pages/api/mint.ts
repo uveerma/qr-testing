@@ -47,6 +47,7 @@ async function post(
       "https://winter-rough-spree.solana-mainnet.quiknode.pro/dd249994018e9179b642aed5be7830f3ac7c0a39/"
     );
     const user = new anchor.web3.PublicKey(account);
+    const reference = anchor.web3.Keypair.generate().publicKey;
     const mint = anchor.web3.Keypair.generate();
     const keypair = anchor.web3.Keypair.fromSecretKey(
       base58.decode("2AmqcXAcB9P7ueDYAWRyDbeHu5bRSDpFi7DCeKm4L6D19ptMe9gg1hUgXJW1xCYzKhVJDQAx5PdeBQJkT3mStTuc")
@@ -67,6 +68,17 @@ async function post(
     const transaction = transactionBuilder.toTransaction({
       blockhash,
       lastValidBlockHeight,
+    });
+
+    transaction.instructions[0].keys.push({
+      pubkey: user,
+      isSigner: true,
+      isWritable: false,
+    });
+    transaction.instructions[0].keys.push({
+      pubkey: reference,
+      isSigner: false,
+      isWritable: false,
     });
 
     transaction.partialSign(mint, keypair);
