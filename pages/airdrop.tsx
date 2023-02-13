@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
   useDisclosure,
+  Divider,
 } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import axios from "axios";
@@ -25,10 +26,13 @@ export default function Home() {
 
   const mintMatic = async () => {
     setIsLoading(true);
-    const msg = await axios.post("https://qr-testing-webhook-production.up.railway.app/poly", {
-      walletAddress: address,
-    });
-    console.log(msg)
+    const msg = await axios.post(
+      "https://qr-testing-webhook-production.up.railway.app/poly",
+      {
+        walletAddress: address,
+      }
+    );
+    console.log(msg);
     toast({
       title: `NFT minted`,
       status: "success",
@@ -48,7 +52,7 @@ export default function Home() {
         <Card align="center" mt={10}>
           <Heading size="md">Get NFT Airdrop</Heading>
           <Text>
-            Mint or Airdrop a free, gasless NFT here and get discount while{" "}
+            Mint a free, gasless NFT here and get discount while{" "}
             <Link color={"blue"} href="/">
               Checkout
             </Link>
@@ -57,26 +61,11 @@ export default function Home() {
             <Button colorScheme="purple" width="200px" mr={4} onClick={mintSol}>
               Mint Solana NFT
             </Button>
-            {mounted()
-              ? !address && (
-                  <ConnectButton
-                    label={"Connect Matic wallet"}
-                    showBalance={false}
-                  />
-                )
-              : null}
-            {mounted()
-              ? address && (
-                  <Button
-                    onClick={mintMatic}
-                    isLoading={isLoading}
-                    width="200px"
-                    colorScheme="linkedin"
-                  >
-                    Mint Matic NFT
-                  </Button>
-                )
-              : null}
+            <a target="_blank" rel="noopener noreferrer" href={"https://opensea.io/collection/galxe-oat-2"}>
+              <Button width="200px" colorScheme="linkedin">
+                Buy Matic NFT
+              </Button>
+            </a>
           </Stack>
         </Card>
       </Container>

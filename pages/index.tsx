@@ -46,7 +46,7 @@ export default function Home() {
     setIsLoading(true);
     const nfts = await alchemy.nft.verifyNftOwnership(
       address!,
-      "0x0AaC69886E4f44Fe08170e106613cb05619E5845"
+      "0x5D666F215a85B87Cb042D59662A7ecd2C8Cc44e6"
     );
     setIsEligible(nfts);
     onOpen();
