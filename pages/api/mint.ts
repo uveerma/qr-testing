@@ -55,9 +55,9 @@ async function post(
     const metaplex = Metaplex.make(connection).use(keypairIdentity(keypair));
 
     const transactionBuilder = await metaplex.nfts().builders().create({
-      uri: "https://res.cloudinary.com/dtzqgftjk/raw/upload/v1675415684/superteam-call_z5zyyv.json",
-      name: "Solana Ecosystem Community Call",
-      symbol: "SUPR",
+      uri: "https://res.cloudinary.com/dtzqgftjk/raw/upload/v1676294544/nike-coupon_hi0151.json",
+      name: "Nike NFT Coupon",
+      symbol: "NIKE",
       sellerFeeBasisPoints: 10000,
       useNewMint: mint,
       tokenOwner: user,
