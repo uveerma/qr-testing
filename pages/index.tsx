@@ -107,8 +107,9 @@ export default function Home() {
                 <Text color={"gray.800"} fontSize={"2xl"} fontWeight={"300"}>
                   The radiance lives on in the Nike Air Force 1 &apos;07, the
                   basketball original that puts a fresh spin on what you know
-                  best: durably stitched overlays, clean finishes and the
-                  perfect amount of flash to make you shine.{" "}
+                  best! 
+                  <br/>
+                 [Refresh the page if you do not see the polygon button]
                 </Text>
               </VStack>
             </Stack>

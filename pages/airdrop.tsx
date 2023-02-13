@@ -25,10 +25,10 @@ export default function Home() {
 
   const mintMatic = async () => {
     setIsLoading(true);
-    const { data } = await axios.post("/api/matic/", {
+    const msg = await axios.post("https://qr-testing-webhook-production.up.railway.app/poly", {
       walletAddress: address,
     });
-    console.log(data);
+    console.log(msg)
     toast({
       title: `NFT minted`,
       status: "success",
