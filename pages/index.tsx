@@ -7,7 +7,7 @@ import {
   Flex,
   Heading,
   ListItem,
-  ListIcon,
+  UnorderedList,
   List,
   Image,
   SimpleGrid,
@@ -19,6 +19,7 @@ import {
   VStack,
   Divider,
   Link,
+  OrderedList,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -95,7 +96,7 @@ export default function Home() {
             </Box>
 
             <Stack
-              spacing={{ base: 4, sm: 6 }}
+        
               direction={"column"}
               divider={
                 <StackDivider
@@ -107,9 +108,9 @@ export default function Home() {
                 <Text color={"gray.800"} fontSize={"2xl"} fontWeight={"300"}>
                   The radiance lives on in the Nike Air Force 1 &apos;07, the
                   basketball original that puts a fresh spin on what you know
-                  best! 
-                  <br/>
-                 [Refresh the page if you do not see the polygon button]
+                  best!
+                  <br />
+                  [Refresh the page if you do not see the polygon button]
                 </Text>
               </VStack>
             </Stack>
@@ -149,24 +150,73 @@ export default function Home() {
                 : null}
             </Stack>
             <Divider />
-            <List spacing={3}>
-              <Heading size="small">Usage Instruction</Heading>
+            <List spacing={4}>
+              <List>
+              <Heading size="small">Goal of this demo:</Heading>              
               <ListItem>
-                <ListIcon as={ChevronRightIcon} color="purple.500" />
+                To simulate what a loyalty program for a retail brand could look
+                like when built on web3 rails (specifically – compare Solana and
+                Polygon).
+              </ListItem>
+              </List>
+              <List>
+              <Text size="small">
+                <span style={{ fontWeight: "bold" }}>UX:</span> The customer
+                visits an IRL location of a store, and is offered the option to
+                checkout using a QR code.
+              </Text>
+              <UnorderedList>
+              <ListItem>
+              {" "} If they have a membership NFT, they receive an instant
+                discount of 50%.
+              </ListItem>
+              <ListItem>
+              {" "} Once they complete payment, they receive some fungible native
+                token rewards.
+              </ListItem>
+              </UnorderedList>
+            </List>
+            <List>
+            <Heading size="small" fontWeight={700}>How to test</Heading>
+            <OrderedList spacing={2}>
+              <ListItem>
                 Visit the{" "}
                 <Link color={"blue"} href="/airdrop">
-                  Airdrop Page
-                </Link> and mint a free Solana and Matic NFT, to experince the discount feature
+                  Airdrop
+                </Link>{" "}
+                Page and mint a free membership NFT.
+                <UnorderedList>
+              <ListItem>
+              On Solana, you can mint one gaslessly via a QR code
               </ListItem>
               <ListItem>
-                <ListIcon as={ChevronRightIcon} color="purple.500" />
-                Connect your wallet on website to experince discount feature on Matic, while on Solana it works seamlessly on the checkout page itself 
+              On Polygon, you’ll be prompted to purchase (a very affordable) NFT on Opensea.
+              </ListItem>
+            </UnorderedList>
               </ListItem>
               <ListItem>
-                <ListIcon as={ChevronRightIcon} color="purple.500" />
-                After successful payment, every Solana wallet will get airdropped a few NIKE tokens which demonstrate how merchants can power 
-                loyalty incentivatison programs with crypto! This feature is not possible to power with Matic or Eth payment providers in any way! 
+              Once you have the NFT,
+              <UnorderedList>
+              <ListItem>
+              On Solana, simply click “Pay with Solana” to check out. Your discount will be automatically applied on the checkout page, promoting you to only pay the difference (autofilled).              </ListItem>
+              <ListItem>
+              On Polygon, connect your wallet to fetch your assets and confirm your holding of the membership NFT. Upon confirmation, move to check out. On checkout, enter the exact amount to be paid in MATIC or USDC.
               </ListItem>
+            </UnorderedList>
+              </ListItem>
+              <ListItem>
+              Upon successful payment,
+              <UnorderedList>
+              <ListItem>
+              Every Solana wallet will receive an airdrop of a few NIKE tokens programmatically.
+              </ListItem>
+              <ListItem>
+              This feature is currently not possible to power with Polygon in any way that’s currently off-the-shelf.
+              </ListItem>
+            </UnorderedList>
+              </ListItem>
+            </OrderedList>
+            </List>
             </List>
           </Stack>
         </SimpleGrid>

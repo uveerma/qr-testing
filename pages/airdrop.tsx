@@ -50,9 +50,9 @@ export default function Home() {
       <Container maxW={"7xl"}>
         <MintModal isOpen={isOpen} onClose={onClose} />
         <Card align="center" mt={10}>
-          <Heading size="md">Get NFT Airdrop</Heading>
+          <Heading size="md">Membership NFT</Heading>
           <Text>
-            Mint a free, gasless NFT here and get discount while{" "}
+          Acquire a membership NFT to receive a discount on{" "}
             <Link color={"blue"} href="/">
               Checkout
             </Link>
