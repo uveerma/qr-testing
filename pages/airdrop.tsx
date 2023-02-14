@@ -52,9 +52,9 @@ export default function Home() {
         <Card align="center" mt={10}>
           <Heading size="md">Membership NFT</Heading>
           <Text>
-          Acquire a membership NFT to receive a discount on{" "}
+          Acquire a membership NFT to receive a discount during{" "}
             <Link color={"blue"} href="/">
-              Checkout
+              checkout
             </Link>
           </Text>
           <Stack direction={"row"} pt={5}>
