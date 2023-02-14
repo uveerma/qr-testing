@@ -20,14 +20,12 @@ interface IProps {
 
 const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
   const [load, setLoad] = useState(false);
-  const [value, setValue] = useState(0.1);
   const router = useRouter();
 
   const commerceHandler = async () => {
     setLoad(true);
-    if (isEligible) {
-      setValue(0.05);
-    }
+    
+    const price = isEligible ? 0.05 : 0.1;
 
     const response = await axios.post(
       "https://api.commerce.coinbase.com/charges/",
@@ -35,7 +33,7 @@ const PayModal: FC<IProps> = ({ isOpen, onClose, isEligible }) => {
         name: "Nike Air Force",
         pricing_type: "fixed_price",
         local_price: {
-          amount: `${value}`,
+          amount: `${price}`,
           currency: "USD",
         },
       },

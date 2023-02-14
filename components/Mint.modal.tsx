@@ -26,10 +26,9 @@ const MintModal: FC<IProps> = ({ isOpen, onClose }) => {
         <ModalCloseButton />
         <ModalBody display="flex" justifyContent="center" flexDir="column">
           <Text align="center" fontSize="md" mb="3" mt="0.5">
-            Scan this QR Code from your Phantom wallet and mint a free gasless NFT,
-            to get discounts on{" "}
+            Scan this QR Code from your Phantom wallet and acquire a membership NFT to receive discount during{" "}
             <Link color={"blue"} href="/">
-              Checkout{" "}
+              checkout{" "}
             </Link>
           </Text>
           <Box px={10} mb={3}>
