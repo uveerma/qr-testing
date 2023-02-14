@@ -131,7 +131,7 @@ export default function Home() {
               {mounted()
                 ? !address && (
                     <ConnectButton
-                      label={"Connect Matic wallet"}
+                      label={"Connect Polygon wallet"}
                       showBalance={false}
                     />
                   )
@@ -144,7 +144,7 @@ export default function Home() {
                       width="200px"
                       colorScheme="linkedin"
                     >
-                      Pay with Matic
+                      Pay with Polygon
                     </Button>
                   )
                 : null}

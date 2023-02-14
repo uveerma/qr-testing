@@ -63,7 +63,7 @@ export default function Home() {
             </Button>
             <a target="_blank" rel="noopener noreferrer" href={"https://opensea.io/collection/galxe-oat-2"}>
               <Button width="200px" colorScheme="linkedin">
-                Buy Matic NFT
+                Buy Polygon NFT
               </Button>
             </a>
           </Stack>
