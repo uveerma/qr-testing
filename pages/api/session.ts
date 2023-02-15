@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ],
         discounts: {
           verified_creator_address:
-            "4Bxkgsf8xC5pxS8jYKmpjcFt7vaCYcaKsnXEWgPMbNMG",
+            "7EdPThLYY7S34xoPUGiBKLsRksq5w63Po487tqS193zp",
           discount: 0.5,
           name: "Nike Coupons",
           image: "https://cdn.freebiesupply.com/logos/large/2x/nike-4-logo-png-transparent.png",
