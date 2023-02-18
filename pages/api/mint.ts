@@ -48,24 +48,23 @@ async function post(
     );
     const user = new anchor.web3.PublicKey(account);
     const reference = anchor.web3.Keypair.generate().publicKey;
-    const mint = anchor.web3.Keypair.generate();
     const keypair = anchor.web3.Keypair.fromSecretKey(
       base58.decode(process.env.SOL_PRIVATE_KEY!)
     );
     const metaplex = Metaplex.make(connection).use(keypairIdentity(keypair));
+    const candyMachineId = new anchor.web3.PublicKey("DkfJyR97kENzTDrhQhkcWoERtD4JCRvBgmRkyVPb2VXg");
+    const candyMachine = await metaplex.candyMachinesV2().findByAddress({
+      address: candyMachineId,
+    });
 
-    const transactionBuilder = await metaplex.nfts().builders().create({
-      uri: "https://res.cloudinary.com/dtzqgftjk/raw/upload/v1676294544/nike-coupon_hi0151.json",
-      name: "Nike NFT Coupon",
-      symbol: "NIKE",
-      sellerFeeBasisPoints: 10000,
-      useNewMint: mint,
-      tokenOwner: user,
+    const mintBuilder = await metaplex.candyMachinesV2().builders().mint({
+      candyMachine,
+      newOwner: user,
     });
 
     const { blockhash, lastValidBlockHeight } =
       await connection.getLatestBlockhash();
-    const transaction = transactionBuilder.toTransaction({
+    const transaction = mintBuilder.toTransaction({
       blockhash,
       lastValidBlockHeight,
     });
@@ -80,8 +79,10 @@ async function post(
       isSigner: false,
       isWritable: false,
     });
+    const mintSigner = mintBuilder.getContext()
+    .mintSigner as anchor.web3.Signer;
 
-    transaction.partialSign(mint, keypair);
+    transaction.partialSign(mintSigner, keypair);
 
     const serializedTransaction = transaction.serialize({
       requireAllSignatures: false,
