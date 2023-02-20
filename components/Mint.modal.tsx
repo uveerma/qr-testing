@@ -42,8 +42,8 @@ const MintModal: FC<IProps> = ({ isOpen, onClose }) => {
                 </Text>
                 <Box px={10} mb={3}>
                   <Image
-                    src="https://res.cloudinary.com/dtzqgftjk/image/upload/v1676323319/nike-coupon_qloadj.png"
-                    alt="Solana mint nft"
+                    src="https://res.cloudinary.com/dtzqgftjk/image/upload/v1676907754/qr-code_-_2023-02-20T211225.731_j5j2dk.png"
+                    alt="Mint Solana NFT"
                   />
                 </Box>
               </TabPanel>
@@ -54,7 +54,7 @@ const MintModal: FC<IProps> = ({ isOpen, onClose }) => {
                 <Box px={10} mb={3}>
                   <Image
                     src="https://res.cloudinary.com/dtzqgftjk/image/upload/v1676902319/qr-code_-_2023-02-20T194148.632_nitsps.png"
-                    alt="Buy polygon nft"
+                    alt="Buy Polygon NFT"
                   />
                 </Box>
               </TabPanel>
