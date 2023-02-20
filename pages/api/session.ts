@@ -18,11 +18,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           },
         ],
         discounts: {
-          verified_creator_address:
-            "7EdPThLYY7S34xoPUGiBKLsRksq5w63Po487tqS193zp",
+          collection_id:
+            "ac64ea74280411e2e145dadd18c2d5b6",
           discount: 0.5,
-          name: "Nike Coupons",
-          image: "https://cdn.freebiesupply.com/logos/large/2x/nike-4-logo-png-transparent.png",
+          name: "Rolling Bones",
+          image: "https://cdn.coralcube.io/111/rs:fit:400:400:0:0/aHR0cHM6Ly9uZnQtY29sbGFnZS5zMy5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbS9wdWJsaWMvcm9sbGluZ19ib25lcy5QTkc_dD0xNjc2NDgwNzAw",
         },
       });
 

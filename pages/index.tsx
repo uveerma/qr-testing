@@ -57,9 +57,10 @@ export default function Home() {
   const sessionHandler = async () => {
     setLoadkar(true);
     const { data } = await axios.post("/api/session/");
-    const url = data.redirect_url.replace("checkout", "pos");
+    console.log(data)
+   const url = data.payment_url.replace("checkout", "pos");
     setLoadkar(false);
-    router.push(url);
+   router.push(url);
   };
 
   return (

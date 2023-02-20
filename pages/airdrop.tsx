@@ -58,9 +58,11 @@ export default function Home() {
             </Link>
           </Text>
           <Stack direction={"row"} pt={5}>
-            <Button colorScheme="purple" width="200px" mr={4} onClick={mintSol}>
-              Mint Solana NFT
+          <a target="_blank" rel="noopener noreferrer" href={"https://coralcube.io/collection/rolling_bones"}>
+            <Button colorScheme="purple" width="200px" mr={4}>
+              Buy Solana NFT
             </Button>
+            </a>
             <a target="_blank" rel="noopener noreferrer" href={"https://opensea.io/collection/galxe-oat-2"}>
               <Button width="200px" colorScheme="linkedin">
                 Buy Polygon NFT
