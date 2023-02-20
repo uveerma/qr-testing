@@ -1,5 +1,3 @@
-import { PayModal } from "@/components/Pay.modal";
-import useIsMounted from "@/hooks/useIsMounted";
 import {
   Box,
   Button,
@@ -21,52 +19,77 @@ import {
   Link,
   OrderedList,
 } from "@chakra-ui/react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Alchemy, Network } from "alchemy-sdk";
 import axios from "axios";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
+import { MintModal } from "@/components/Mint.modal";
+
 
 export default function Home() {
   const [loadkar, setLoadkar] = useState(false);
-  const mounted = useIsMounted();
   const { address } = useAccount();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isEligible, setIsEligible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const alchemy = new Alchemy({
-    apiKey: "LuicHLT5VC12MSjLYUqoP7KHvompKRfa",
-    network: Network.MATIC_MAINNET,
-  });
-
-  const getNfts = async () => {
+  const payPoly = async () => {
     setIsLoading(true);
+
+    const alchemy = new Alchemy({
+      apiKey: "LuicHLT5VC12MSjLYUqoP7KHvompKRfa",
+      network: Network.MATIC_MAINNET,
+    });
+
     const nfts = await alchemy.nft.verifyNftOwnership(
       address!,
       "0x5D666F215a85B87Cb042D59662A7ecd2C8Cc44e6"
     );
-    setIsEligible(nfts);
-    onOpen();
-    setIsLoading(false);
+
+    const price = nfts ? 0.05 : 0.1;
+
+    const response = await axios.post(
+      "https://api.commerce.coinbase.com/charges/",
+      {
+        name: "Nike Air Force",
+        pricing_type: "fixed_price",
+        local_price: {
+          amount: `${price}`,
+          currency: "USD",
+        },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-CC-Api-Key": "957d57f9-b8b8-4b4e-bd7d-984b96dd716f",
+          "X-CC-Version": "2018-03-22",
+        },
+      }
+    );
+
+    const payment_url = response.data.data.hosted_url;
+    router.push(payment_url);
   };
 
-  const sessionHandler = async () => {
+  const paySol = async () => {
     setLoadkar(true);
     const { data } = await axios.post("/api/session/");
     console.log(data)
-   const url = data.payment_url.replace("checkout", "pos");
-    setLoadkar(false);
-   router.push(url);
+    const url = data.payment_url.replace("checkout", "pos");
+    router.push(url);
+  };
+
+
+  const mintNft = async () => {
+    onOpen();
   };
 
   return (
     <>
       <Container maxW={"7xl"}>
-        <PayModal isOpen={isOpen} onClose={onClose} isEligible={isEligible} />
+        <MintModal isOpen={isOpen} onClose={onClose} />
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
           spacing={{ base: 8, md: 10 }}
@@ -109,8 +132,6 @@ export default function Home() {
                   The radiance lives on in the Nike Air Force 1 &apos;07, the
                   basketball original that puts a fresh spin on what you know
                   best!
-                  <br />
-                  [Refresh the page if you do not see the polygon button]
                 </Text>
               </VStack>
             </Stack>
@@ -123,31 +144,26 @@ export default function Home() {
                 as="b"
                 borderRadius={8}
                 isLoading={loadkar}
-                onClick={sessionHandler}
+                onClick={paySol}
               >
                 Pay with Solana
               </Button>
-
-              {mounted()
-                ? !address && (
-                    <ConnectButton
-                      label={"Connect Polygon wallet"}
-                      showBalance={false}
-                    />
-                  )
-                : null}
-              {mounted()
-                ? address && (
-                    <Button
-                      onClick={getNfts}
-                      isLoading={isLoading}
-                      width="200px"
-                      colorScheme="linkedin"
-                    >
-                      Pay with Polygon
-                    </Button>
-                  )
-                : null}
+              {address ?
+                (<Button
+                  onClick={payPoly}
+                  isLoading={isLoading}
+                  width="200px"
+                  colorScheme="linkedin"
+                >
+                  Pay with Polygon
+                </Button>)
+                :
+                (
+                  <ConnectButton
+                    label={"Connect Polygon wallet"}
+                    showBalance={false}
+                  />
+                )}
             </Stack>
             <Divider />
             <List spacing={4}>
@@ -184,11 +200,11 @@ export default function Home() {
                 </Heading>
                 <OrderedList spacing={2}>
                   <ListItem>
-                    Visit the{" "}
-                    <Link color={"blue"} href="/airdrop">
+                    Click{" "}
+                    <Button color={"blue"} onClick={mintNft}>
                       Airdrop
-                    </Link>{" "}
-                    Page and mint a free membership NFT.
+                    </Button>{" "}
+                    and mint a free membership NFT.
                     <UnorderedList>
                       <ListItem>
                         On Solana, you can mint one gaslessly via a QR code

@@ -12,6 +12,7 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygon } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { useState, useEffect } from 'react';
 
 const { chains, provider } = configureChains(
   [polygon],
@@ -33,22 +34,30 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [ready, setready] = useState(false);
+
+  useEffect(() => {
+    setready(true)
+  }, [])
+
   return (
-    <ChakraProvider>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider
-          theme={lightTheme({
-            accentColor: "#3182CE",
-            accentColorForeground: "white",
-            borderRadius: "medium",
-          })}
-          modalSize="compact"
-          chains={chains}
-        >
-          <Toaster />
-          <Component {...pageProps} />
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </ChakraProvider>
+    <>
+      {ready ? (<ChakraProvider>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider
+            theme={lightTheme({
+              accentColor: "#3182CE",
+              accentColorForeground: "white",
+              borderRadius: "medium",
+            })}
+            modalSize="compact"
+            chains={chains}
+          >
+            <Toaster />
+            <Component {...pageProps} />
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </ChakraProvider>) : null}
+    </>
   );
 }
