@@ -17,6 +17,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             quantity: 1,
           },
         ],
+          discounts:{
+            collection_id:
+              "AnJJQKgpS5BmQd5iHjjMcoDqm3AEjSv4erFLJjujLYPr", 
+            discount: 0.5,
+            name: "Solana Attendance Token",
+            image:
+              "https://res.cloudinary.com/dtzqgftjk/image/upload/v1671540678/Vector_1_zxj0wf.png",
+          }
       });
 
       return res.status(200).json(response);
