@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ],
           discounts:{
             collection_id:
-              "CAhg2bx31wkYz3PQ5u4D9w8KLzRuXxLSAYMCDWMzMN7", 
+              "HVNvZSGUtDn1RgYsYLpuRpav3TNeYAmZjPDKf4GGS8Db", 
             discount: 0.5,
             name: "Solana Attendance POAP",
             image:
