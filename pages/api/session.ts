@@ -19,9 +19,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ],
           discounts:{
             collection_id:
-              "AnJJQKgpS5BmQd5iHjjMcoDqm3AEjSv4erFLJjujLYPr", 
+              "CAhg2bx31wkYz3PQ5u4D9w8KLzRuXxLSAYMCDWMzMN7", 
             discount: 0.5,
-            name: "Solana Attendance Token",
+            name: "Solana Attendance POAP",
             image:
               "https://res.cloudinary.com/dtzqgftjk/image/upload/v1671540678/Vector_1_zxj0wf.png",
           }

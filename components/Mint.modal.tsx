@@ -42,7 +42,7 @@ const MintModal: FC<IProps> = ({ isOpen, onClose }) => {
                 </Text>
                 <Box px={10} mb={3}>
                   <Image
-                    src="https://res.cloudinary.com/dtzqgftjk/image/upload/v1676907754/qr-code_-_2023-02-20T211225.731_j5j2dk.png"
+                    src="https://i.ibb.co/6gMk7CY/idk-man.png"
                     alt="Mint Solana NFT"
                   />
                 </Box>
